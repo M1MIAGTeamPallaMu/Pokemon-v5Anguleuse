@@ -1,0 +1,5 @@
+<button type="button" (click)="allPokemons()" class="btn btn-btn-success">log me</button>
+<li class="list-group-item" *ngFor="let pokemon of pokemons.results">
+  {{pokemon.name}}
+  {{pokemon.url}}
+</li>
