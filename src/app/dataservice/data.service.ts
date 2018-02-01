@@ -10,15 +10,12 @@ export class DataService {
   constructor( private http : HttpClient) {}
 
   getPokemons<T>() : Observable<T> {
-    return <Observable<T>>this.http.get(API_URL + '?limit=909');
+    return <Observable<T>>this.http.get(API_URL);
   }
 
   getPokemon<T>(url : string): Observable<T> {
     return <Observable<T>>this.http.get(url);
   }
-
-
-
 
 }
 
