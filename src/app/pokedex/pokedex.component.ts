@@ -9,19 +9,47 @@ import {DataService} from '../dataservice/data.service';
 })
 export class PokedexComponent implements OnInit {
 
-  pokemons : any = [];
-  constructor(private dataService : DataService) { }
+  pokemons: any = [];
+  pokemon : any = [];
+
+  constructor(private dataService: DataService) {
+  }
 
   ngOnInit() {
-
+    this.onePokemon();
   }
 
   allPokemons() {
     this.dataService.getPokemons().subscribe(
-      data => this.pokemons = data,
+      data => console.log(data),
       err => console.log(err),
-      () => console.log('loading data')
+      () => console.log('fetched correctly')
     );
   }
 
+  onePokemon() {
+    this.dataService.getPokemon('https://pokeapi.co/api/v2/pokemon/1').subscribe(
+      data => {
+        this.pokemon = data;
+        this.getDescription(this.pokemon.species.url);
+      },
+      err => console.log(err),
+      () => console.log('fetched correctly')
+    );
+
+  }
+
+  getDescription(url){
+    this.dataService.getPokemon(url).subscribe(
+      data => {
+        this.pokemon.description = data;
+      },
+      err => console.log(err),
+      () => console.log('fetched corretly'),
+
+    );
+  }
 }
+
+
+
