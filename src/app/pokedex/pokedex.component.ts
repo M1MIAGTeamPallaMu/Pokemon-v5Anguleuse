@@ -16,12 +16,13 @@ export class PokedexComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.allPokemons();
     this.onePokemon();
   }
 
   allPokemons() {
     this.dataService.getPokemons().subscribe(
-      data => console.log(data),
+      data => this.pokemons = data,
       err => console.log(err),
       () => console.log('fetched correctly')
     );
@@ -36,7 +37,6 @@ export class PokedexComponent implements OnInit {
       err => console.log(err),
       () => console.log('fetched correctly')
     );
-
   }
 
   getDescription(url){
@@ -45,8 +45,7 @@ export class PokedexComponent implements OnInit {
         this.pokemon.description = data;
       },
       err => console.log(err),
-      () => console.log('fetched corretly'),
-
+      () => console.log('fetched correctly'),
     );
   }
 }
